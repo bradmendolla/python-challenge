@@ -51,6 +51,7 @@ with open(budget_csv, "r") as csvfile:
     
 with open(budget_csv, "r") as dictfile:
     
+    # csvreader define
     
     csvreader = csv.reader(dictfile, delimiter = ",")
     header = next(csvreader)
