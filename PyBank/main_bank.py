@@ -16,7 +16,7 @@ def avg_change(monthly_profit):
         value = (float(monthly_profit[i + 1]) - float(monthly_profit[i])) / 2
         i += 1
         average_profit.append(value)
-    avg = float((sum(average_profit)) / len(average_profit))
+    avg = stat.mean(average_profit)
     print(avg)
     return monthly_profit
 
@@ -33,23 +33,21 @@ with open(budget_csv, "r") as csvfile:
         #create list of months 
         months.append(row[0])
         
-max_value = max(monthly_profit)
-min_value = min(monthly_profit)
-avg_value = stat.mean(monthly_profit)
-
-
+    max_value = max(monthly_profit)
+    min_value = min(monthly_profit)
     
+
+avg_value = stat.mean(monthly_profit)   
 
     
     # print values as text
     
-    
-print(f"Months: " + str(len(months)))
-
+print(months)    
+print("Months: " + str(len(months)))
+print(f"Total profit : ${sum(monthly_profit)}")
 
 print(avg_value)
 print(max_value)
 print(min_value)
 avg_change(monthly_profit)
-print(average_profit)
 
