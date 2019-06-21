@@ -1,6 +1,0 @@
-Months: 86
-Total profit : $38382578
-Average Change in Monthly Profit: $-1157.5588235294117
-Average Monthly Profit: $446309.0465116279
-Highest Profit Month: 12-Feb $1170593
-Lowest Profit Month: 13-Sep $-1196225

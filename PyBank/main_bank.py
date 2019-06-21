@@ -1,6 +1,7 @@
 import os
 import csv
 import statistics as stat
+import operator
 
 budget_csv = os.path.join ("..", "Resources", "budget_data.csv")
 
@@ -40,12 +41,11 @@ with open(budget_csv, "r") as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     # skip header
     header = next(csvreader)
-    profit_dict = dict((int(rows[1]),rows[0]) for rows in csvreader)
+    profit_dict = {row[0]:int(row[1]) for row in csvreader}
 
-max_value = max(profit_dict)
-min_value = min(profit_dict)
-
-
+# take max and min values and return a key
+max_val = max(profit_dict.items(), key=operator.itemgetter(1))[0]
+min_val = min(profit_dict.items(), key=operator.itemgetter(1))[0]
 
 avg_value = stat.mean(monthly_profit)   
 i = 0
@@ -57,24 +57,24 @@ avg = stat.mean(average_profit)
 
 
     # print values as text
-    
+
+# print to terminal
+print(f"{max_val} ${profit_dict[max_val]}")
+print(f"{min_val} ${profit_dict[min_val]}")    
 print(f"Months: {str(len(months))}")
 print(f"Total profit : ${sum(monthly_profit)}")
 print(f"Average Change in Monthly Profit: ${avg}")
 print(f"Average Profit: ${avg_value}")
-print(f"Highest Profit Month: {profit_dict[max_value]} ${max_value}")
-print(f"Lowest Profit Month: {profit_dict[min_value]} ${min_value}")
 
 
-f = open("output.txt", "w")
+#print to text file
+f = open("analysis.txt", "w")
 f.write(f"Months: {str(len(months))}\n")
 f.write(f"Total profit : ${sum(monthly_profit)}\n")
 f.write(f"Average Change in Monthly Profit: ${avg}\n")
-f.write(f"Average Monthly Profit: ${str(avg_value)}\n")
-f.write(f"Highest Profit Month: {profit_dict[max_value]} ${max_value}\n")
-f.write(f"Lowest Profit Month: {profit_dict[min_value]} ${min_value}\n")
-
-
+f.write(f"Hightest Profit Month: {max_val} ${profit_dict[max_val]}\n")
+f.write(f"Lowest Profit Month: {min_val} ${profit_dict[min_val]}\n")
+f.write(f"Average Monthly Profit: ${(avg_value)}\n")
 f.close
 
 
