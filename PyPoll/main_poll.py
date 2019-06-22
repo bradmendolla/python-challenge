@@ -1,6 +1,7 @@
 import os
 import csv
 import operator
+
 election_csv = os.path.join( "..", "Resources", "election_data.csv")
 
 
@@ -12,8 +13,6 @@ otoole_vote = 0
 with open (election_csv, "r") as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ",")
     header = next(csvreader)
-
-
     for row in csvreader:
         total_vote +=1
         if row[2]  == "Khan":
@@ -29,8 +28,7 @@ with open (election_csv, "r") as csvfile:
 vote_list = [khan_vote, li_vote, correy_vote, otoole_vote]
 candidates = ["Khan", "Li", "Correy", "O'Toole"]
 # zip lists into dictionary 
-result = zip(candidates, vote_list)
-results_dict = dict(result)
+results_dict = dict(zip(candidates, vote_list))
 # find the winner
 winner = max(results_dict.items(), key=operator.itemgetter(1))[0]
 
